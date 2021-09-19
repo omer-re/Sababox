@@ -9,7 +9,7 @@ https://www.instructables.com/Sababox-Elderly-Friendly-Remote-Control/
 [![Take A look](https://i.imgur.com/zkU0o6T.jpeg)](https://www.instructables.com/Sababox-Elderly-Friendly-Remote-Control/)
 
 
-## ![Project presentation:](https://docs.google.com/presentation/d/1DMn5VZ4cIvDRZib8nhPytUgjmQpMQCULvNPtbFujhZc/edit?usp=sharing)
+## ![Project presentation:](https://docs.google.com/presentation/d/e/2PACX-1vQCZM_ksgL3oxtfN-BX2qDp6d6x7_tDfaDGxTQo-hp4jPZ5anolrv2KEckDI3gIirKOEnVwMLj-9iG6/pub?start=true&loop=false&delayms=10000)
 
 ## ![Project poster:](https://github.com/omer-re/Sababox/blob/main/Sababox%20CRML%20poster.pdf)
 
