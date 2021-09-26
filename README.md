@@ -4,8 +4,7 @@ Elderly friendly remote control
 # Please check our ![Instructable page](https://www.instructables.com/Sababox-Elderly-Friendly-Remote-Control/):
 https://www.instructables.com/Sababox-Elderly-Friendly-Remote-Control/
 ### Our Instructable tutorial won "editor's choice of the day" on the first day it was published!
-[![Very exciting!!](https://i.imgur.com/zkU0o6T.jpeg)]](https://www.instructables.com/Sababox-Elderly-Friendly-Remote-Control/)
-
+ [![Take A look](https://i.imgur.com/zkU0o6T.jpeg)](https://www.instructables.com/Sababox-Elderly-Friendly-Remote-Control/)
 
 ## ![Project presentation:](https://docs.google.com/presentation/d/e/2PACX-1vQCZM_ksgL3oxtfN-BX2qDp6d6x7_tDfaDGxTQo-hp4jPZ5anolrv2KEckDI3gIirKOEnVwMLj-9iG6/pub?start=true&loop=false&delayms=10000)
 
