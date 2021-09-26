@@ -11,13 +11,13 @@
 
 #define IR_SEND_PIN 3
 #define SIG_PIN 2
-#define LED_PIN 2 //NOTE: this is just a regular indication led- has nothing to the with IR nor with the actual operation
+//#define LED_PIN 2 //NOTE: this is just a regular indication led- has nothing to the with IR nor with the actual operation
 
 #define TV_ONOFF_PIN 12 //ENABLED
 #define TV_CH1_PIN 11 //ENABLED
 #define TV_CH12_PIN 10 //ENABLED -MOCKUP-ELADS TV CHANEL 2 
 #define TV_CH13_PIN 9 //ENABLED -MOCKUP-ELADS TV CHANEL 3 
-#define FM88_PIN 8 //DISABLED
+#define FM88_PIN 8 // used as "FIX ME"
 #define DAROM_PIN 7 //DISABLED
 #define TV_CH_PLUS_PIN 6 //ENABLED
 #define TV_VOL_PLUS_PIN 5 //ENABLED
@@ -79,34 +79,35 @@ int two_digit_channel(const uint16_t *digit1_vector, const uint16_t *digit2_vect
 
 
 }
-const PROGMEM uint16_t onOff[67] =     {4480,4470, 530,1720, 530,1670, 530,1720, 530,570, 530,570, 530,570, 530,570, 530,570, 530,1720, 530,1670, 580,1670, 530,570, 530,570, 530,570, 530,570, 530,570, 530,570, 580,1670, 530,570, 530,570, 530,570, 530,570, 530,570, 530,570, 580,1670, 530,570, 530,1720, 530,1670, 580,1670, 530,1720, 530,1670, 530,1720, 530};  // Protocol=SAMSUNG Address=0x707 Command=0x2 Raw-Data=0xFD020707 32 bits LSB first
-  
-const PROGMEM uint16_t CH1[67] =    {8930,4470, 580,520, 580,1670, 580,570, 530,1670, 580,1670, 580,570, 530,1670, 580,1670, 580,520, 580,570, 580,570, 530,570, 580,570, 530,570, 580,1670, 580,1670, 530,1670, 580,570, 580,520, 580,570, 580,1670, 530,570, 580,570, 580,520, 580,570, 580,1670, 530,1670, 580,1670, 580,570, 530,1670, 580,1670, 580,1670, 530};  // Protocol=NEC Address=0xC0DA Command=0x11 Raw-Data=0xEE11C0DA 32 bits LSB first
-  
-const PROGMEM uint16_t CH2[67] =    {8930, 4470, 530, 570, 580, 570, 530, 570, 580, 570, 530, 570, 530, 570, 580, 570, 530, 570, 580, 1670, 580, 1670, 530, 1670, 580, 1720, 530, 1670, 580, 1670, 580, 1670, 580, 520, 580, 570, 530, 1720, 530, 570, 580, 570, 530, 570, 530, 570, 580, 570, 530, 570, 580, 1670, 580, 570, 530, 1670, 580, 1670, 580, 1670, 530, 1720, 530, 1720, 530, 1720, 530}; // Protocol=NEC Address=0x7F00 Command=0x2 Raw-Data=0xFD027F00 32 bits LSB first
-  
-const PROGMEM uint16_t CH3[67] =    {8930,4470, 580,520, 580,1670, 580,570, 530,1670, 580,1670, 580,570, 530,1670, 580,1670, 580,520, 580,570, 580,570, 530,570, 580,570, 530,570, 580,1670, 580,1670, 530,1670, 580,570, 580,520, 580,570, 580,1670, 530,570, 580,570, 580,520, 580,570, 580,1670, 530,1670, 580,1670, 580,570, 530,1670, 580,1670, 580,1670, 530};  // Protocol=NEC Address=0xC0DA Command=0x11 Raw-Data=0xEE11C0DA 32 bits LSB first
 
-const PROGMEM uint16_t chPlus[67] =   {8980,4370, 630,520, 630,1620, 580,520, 630,1620, 580,1620, 630,520, 630,1620, 580,1670, 580,520, 630,520, 580,570, 580,520, 580,520, 630,520, 630,1620, 580,1670, 580,1620, 580,520, 630,520, 630,520, 580,570, 580,520, 580,570, 580,520, 630,520, 580,1670, 580,1620, 580,1620, 630,1670, 580,1620, 580,1670, 580,1620, 630};  // Protocol=NEC Address=0xC0DA Command=0x1 Raw-Data=0xFE01C0DA 32 bits LSB first
+// HOT  
+const PROGMEM uint16_t CH1[67] =    {8880,4470, 530,620, 530,570, 530,570, 530,620, 530,1720, 530,1670, 530,620, 530,570, 530,570, 530,620, 530,570, 530,570, 530,1720, 530,1720, 530,570, 530,620, 530,1670, 530,620, 530,570, 530,1720, 530,1720, 530,570, 530,570, 530,620, 530,570, 530,1720, 530,1670, 530,620, 530,570, 530,1720, 530,1720, 530,1670, 530};  // Protocol=NEC Address=0x3030 Command=0x19 Raw-Data=0xE6193030 32 bits LSB first
+const PROGMEM uint16_t CH2[67] =    {8930,4470, 530,620, 480,620, 530,570, 530,620, 480,1720, 530,1720, 530,570, 530,570, 530,620, 480,620, 530,620, 480,620, 480,1770, 480,1720, 530,570, 530,620, 480,620, 480,1770, 480,570, 530,1720, 530,1720, 530,570, 530,570, 530,620, 530,1670, 530,620, 480,1720, 530,620, 480,620, 530,1720, 480,1720, 530,1720, 530};  // Protocol=NEC Address=0x3030 Command=0x1A Raw-Data=0xE51A3030 32 bits LSB first
+const PROGMEM uint16_t CH3[67] =    {8980,4420, 580,570, 530,570, 580,520, 580,570, 530,1670, 580,1670, 530,570, 580,520, 580,570, 530,570, 530,570, 580,570, 530,1670, 530,1720, 480,620, 530,570, 530,1720, 530,1720, 480,620, 480,1770, 480,1720, 530,620, 480,620, 480,620, 530,570, 530,620, 480,1720, 530,620, 480,620, 480,1770, 480,1720, 530,1720, 480};  // Protocol=NEC Address=0x3030 Command=0x1B Raw-Data=0xE41B3030 32 bits LSB first
+const PROGMEM uint16_t chPlus[67] =   {8880,4520, 530,570, 530,570, 530,620, 480,620, 530,1670, 530,1770, 480,570, 530,620, 530,570, 530,620, 480,570, 530,620, 530,1670, 530,1720, 530,570, 530,620, 530,570, 530,620, 480,620, 480,1770, 480,570, 530,620, 530,570, 530,620, 480,1720, 530,1720, 480,1720, 530,620, 480,1720, 530,1720, 530,1670, 530,1720, 530};  // Protocol=NEC Address=0x3030 Command=0x8 Raw-Data=0xF7083030 32 bits LSB first
+const PROGMEM uint16_t chMinus[67] =  {8930,4470, 580,570, 530,570, 530,570, 530,620, 530,1670, 530,1720, 530,570, 530,620, 530,570, 530,570, 530,570, 530,620, 530,1670, 530,1720, 530,570, 530,570, 580,1670, 580,520, 580,570, 530,1670, 530,570, 580,570, 530,570, 580,520, 580,520, 580,1670, 580,1670, 580,520, 580,1670, 580,1620, 580,1670, 580,1620, 580};  // Protocol=NEC Address=0x3030 Command=0x9 Raw-Data=0xF6093030 32 bits LSB first
 
-const PROGMEM uint16_t volPlus[67] =  {8930,4470, 530,570, 580,570, 580,520, 580,1620, 580,1620, 580,1670, 530,1670, 580,520, 580,1670, 530,1670, 580,1620, 580,570, 530,570, 580,520, 580,570, 530,1670, 580,570, 530,520, 630,1620, 580,1670, 530,570, 530,570, 580,1670, 530,570, 580,1620, 580,1670, 530,570, 530,570, 580,1670, 530,1670, 580,520, 580,1670, 580};  // Protocol=NEC Address=0x78 Command=0x4C Raw-Data=0xB34C8778 32 bits LSB first
-
-const PROGMEM uint16_t chMinus[67] =  {8930,4470, 530,570, 580,570, 580,520, 580,1620, 580,1620, 580,1670, 530,1670, 580,520, 580,1670, 530,1670, 580,1620, 580,570, 530,570, 580,520, 580,570, 530,1670, 580,570, 530,520, 630,1620, 580,1670, 530,570, 530,570, 580,1670, 530,570, 580,1620, 580,1670, 530,570, 530,570, 580,1670, 530,1670, 580,520, 580,1670, 580};  // Protocol=NEC Address=0x78 Command=0x4C Raw-Data=0xB34C8778 32 bits LSB first
-
-const PROGMEM uint16_t volMinus[67] =   {8880,4470, 530,620, 530,570, 530,620, 530,1670, 530,1670, 530,1720, 530,1670, 530,570, 530,1720, 530,1670, 530,1670, 530,570, 580,570, 530,570, 530,620, 530,1670, 530,1670, 530,1720, 530,1670, 530,1670, 530,1670, 530,620, 530,570, 530,620, 530,570, 530,620, 530,570, 530,570, 530,620, 530,1670, 530,1670, 530,1720, 530};  // Protocol=NEC Address=0x78 Command=0x1F Raw-Data=0xE01F8778 32 bits LSB first
-
+// AC
 const PROGMEM uint16_t ACon[99] =     {4380, 4370, 480, 1670, 480, 620, 480, 1670, 480, 1670, 530, 570, 480, 620, 480, 1670, 480, 620, 530, 520, 530, 1670, 480, 620, 480, 620, 430, 1720, 480, 1670, 480, 570, 530, 1670, 530, 570, 480, 620, 480, 1620, 530, 1670, 480, 1720, 430, 1720, 480, 1670, 480, 1670, 530, 1670, 480, 1720, 430, 620, 480, 570, 480, 620, 480, 620, 480, 620, 430, 620, 530, 620, 430, 620, 480, 570, 480, 620, 480, 620, 480, 620, 430, 670, 430, 670, 430, 1670, 480, 1720, 430, 1720, 480, 1720, 430, 1670, 480, 1720, 480, 1670, 480, 1670, 530}; // Protocol=SAMSUNG Address=0xB24D Command=0x3B2 Raw-Data=0x3FCB24D 48 bits LSB first
-
 const PROGMEM uint16_t ACoff[99] =    {4330, 4420, 480, 1670, 480, 620, 480, 1670, 480, 1720, 480, 570, 480, 620, 480, 1670, 480, 620, 530, 570, 480, 1670, 480, 620, 480, 620, 430, 1720, 480, 1670, 480, 620, 480, 1670, 530, 570, 480, 1670, 480, 1720, 430, 1720, 480, 1670, 480, 620, 480, 1670, 480, 1720, 480, 1670, 480, 620, 430, 620, 480, 620, 480, 620, 480, 1670, 480, 620, 480, 570, 530, 1670, 480, 1670, 480, 1670, 480, 620, 480, 620, 430, 620, 480, 620, 480, 620, 480, 620, 430, 620, 480, 620, 480, 1670, 480, 1720, 430, 1720, 480, 1670, 480, 1670, 530}; // Protocol=SAMSUNG Address=0xB24D Command=0x21B2 Raw-Data=0x21DEB24D 48 bits LSB first
-
 const PROGMEM uint16_t ACheat[99] =   {4330, 4420, 480, 1670, 480, 620, 480, 1670, 480, 1670, 530, 570, 480, 620, 480, 1670, 480, 620, 530, 520, 530, 1670, 480, 620, 480, 620, 430, 1670, 530, 1670, 480, 620, 480, 1670, 530, 520, 530, 620, 480, 1620, 530, 1670, 480, 1670, 480, 1720, 480, 1670, 480, 1670, 530, 1670, 480, 1670, 480, 620, 480, 570, 480, 620, 480, 570, 530, 570, 480, 620, 530, 1620, 480, 620, 480, 620, 480, 1670, 480, 1670, 480, 1670, 530, 620, 430, 620, 530, 570, 480, 1670, 480, 1720, 480, 570, 480, 620, 480, 570, 530, 1670, 480, 1670, 530}; // Protocol=SAMSUNG Address=0xB24D Command=0x3B2 Raw-Data=0x3FCB24D 48 bits LSB first
-
 const PROGMEM uint16_t ACcool[99] =   {4330, 4370, 580, 1620, 580, 470, 580, 1620, 580, 1570, 580, 520, 580, 470, 580, 1620, 580, 470, 530, 570, 580, 1570, 580, 520, 580, 520, 580, 1570, 580, 1570, 580, 520, 580, 1620, 480, 570, 580, 520, 580, 1570, 580, 1570, 580, 1620, 580, 1570, 580, 1570, 580, 1620, 530, 1620, 580, 1570, 580, 520, 580, 520, 530, 520, 580, 520, 580, 520, 580, 470, 580, 520, 580, 520, 580, 520, 530, 520, 580, 520, 580, 520, 580, 470, 580, 520, 580, 1570, 580, 1620, 580, 1570, 580, 1620, 530, 1620, 530, 1620, 580, 1570, 580, 1570, 580}; // Protocol=SAMSUNG Address=0xB24D Command=0x3B2 Raw-Data=0x3FCB24D 48 bits LSB first
 
+// TV
+const PROGMEM uint16_t onOff[67] =     {8930,4520, 530,570, 530,570, 530,570, 530,570, 530,570, 530,570, 530,570, 530,570, 480,1720, 530,1670, 530,1670, 530,620, 480,1720, 480,1720, 480,1720, 530,1670, 530,570, 530,520, 530,1720, 530,1670, 530,570, 530,570, 530,570, 530,570, 530,1670, 530,1720, 530,520, 530,570, 580,1620, 530,1720, 480,1720, 480,1720, 530};  // Protocol=NEC Address=0xF700 Command=0xC Raw-Data=0xF30CF700 32 bits LSB first
+const PROGMEM uint16_t TV_ch1[67] = {4480,4520, 480,1720, 530,1720, 480,1720, 530,620, 480,620, 480,620, 480,620, 530,620, 480,1720, 530,1720, 480,1720, 530,570, 530,620, 480,620, 480,620, 530,570, 530,620, 480,620, 480,1720, 530,620, 480,620, 480,620, 530,570, 530,620, 480,1720, 530,1720, 480,620, 480,1720, 530,1720, 480,1770, 480,1720, 480,1770, 480};  // Protocol=SAMSUNG Address=0x707 Command=0x4 Raw-Data=0xFB040707 32 bits LSB first
+const PROGMEM uint16_t TV_source[67] = {8930,4520, 480,620, 480,620, 480,620, 480,620, 480,620, 480,620, 480,620, 480,570, 530,1720, 480,1720, 480,1670, 530,620, 480,1720, 530,1670, 530,1720, 480,1720, 480,620, 480,570, 580,520, 530,1720, 480,1720, 480,620, 480,620, 480,620, 480,1720, 480,1720, 480,1720, 530,570, 530,570, 530,1670, 530,1720, 480,1720, 480};  // Protocol=NEC Address=0xF700 Command=0x18 Raw-Data=0xE718F700 32 bits LSB first
+const PROGMEM uint16_t TV_enter[67] = {8930,4520, 480,570, 530,620, 480,570, 530,620, 480,620, 480,620, 480,620, 480,570, 530,1670, 530,1720, 480,1720, 480,620, 480,1720, 530,1670, 530,1670, 530,1720, 480,1670, 530,1720, 530,1670, 530,570, 530,1670, 530,570, 530,570, 530,570, 530,570, 530,570, 480,620, 480,1720, 530,570, 530,1670, 530,1720, 480,1720, 530};  // Protocol=NEC Address=0xF700 Command=0x17 Raw-Data=0xE817F700 32 bits LSB first
+const PROGMEM uint16_t volPlus[67] =  {8930,4520, 480,620, 480,620, 480,620, 480,620, 480,620, 480,570, 530,620, 530,520, 530,1720, 480,1720, 480,1670, 530,570, 580,1670, 530,1670, 530,1720, 480,1720, 480,620, 480,570, 530,570, 530,620, 480,1720, 480,620, 480,570, 530,570, 530,1720, 530,1670, 480,1720, 480,1720, 530,570, 530,1670, 530,1720, 480,1720, 480};  // Protocol=NEC Address=0xF700 Command=0x10 Raw-Data=0xEF10F700 32 bits LSB first
+const PROGMEM uint16_t volMinus[67] =   {8980,4470, 530,570, 530,570, 530,570, 530,570, 530,570, 530,570, 530,570, 480,620, 480,1720, 530,1670, 530,1670, 480,670, 480,1720, 480,1720, 480,1720, 530,1670, 530,1670, 530,1720, 480,1720, 480,1720, 480,620, 480,620, 480,620, 480,620, 480,620, 480,620, 430,620, 530,570, 480,1720, 530,1720, 480,1720, 480,1720, 530};  // Protocol=NEC Address=0xF700 Command=0xF Raw-Data=0xF00FF700 32 bits LSB first
+
+// no buffer, stored on flash space
+const uint16_t _CH2[67] =  CH2; 
+const uint16_t _CH3[67] =  CH3;
+
 uint16_t temp[200] = {0};
-const uint16_t _CH2[67] =    {8880,4470, 530,620, 530,1670, 530,620, 530,1720, 530,1670, 530,620, 530,1670, 530,1720, 530,620, 530,570, 530,620, 530,570, 530,620, 530,620, 530,1670, 530,1720, 530,620, 530,1670, 530,620, 530,570, 530,1720, 530,620, 530,570, 530,620, 530,1670, 530,620, 530,1720, 530,1670, 530,620, 530,1670, 580,1670, 530,1720, 530};  // Protocol=NEC Address=0xC0DA Command=0x12 Raw-Data=0xED12C0DA 32 bits LSB first
-  
-const uint16_t _CH3[67] =    {8930,4470, 530,570, 580,1670, 580,570, 530,1670, 580,1670, 530,570, 580,1670, 580,1670, 530,570, 580,570, 580,570, 530,570, 580,570, 530,570, 580,1670, 530,1720, 530,1670, 580,1670, 530,570, 580,570, 580,1670, 530,570, 580,570, 530,570, 580,570, 580,570, 530,1670, 580,1670, 530,570, 580,1670, 580,1670, 530,1720, 530};  // Protocol=NEC Address=0xC0DA Command=0x13 Raw-Data=0xEC13C0DA 32 bits LSB first
+
+
 
 void setup()
 {
@@ -143,7 +144,6 @@ void loop() {
     memcpy_P(temp, onOff, sizeof(onOff));
     IrSender.sendRaw(temp, sizeof(onOff) / sizeof(onOff[0]), 38);
    
-    //        Serial.print("d12\n");
   }
 
   else if (LOW == digitalRead(TV_CH1_PIN)) {
@@ -155,9 +155,6 @@ void loop() {
     delay(DELAY_BETWEEN_PRESSES);
     IrSender.sendRaw(temp, sizeof(CH1) / sizeof(CH1[0]), 38);
     digitalWrite(SIG_PIN, LOW);
-
-
-    //    Serial.print("~d11~\n");
   }
 
   else if (LOW == digitalRead(TV_CH12_PIN)) {
@@ -169,10 +166,6 @@ void loop() {
     delay(DELAY_BETWEEN_PRESSES);
     IrSender.sendRaw(_CH2, sizeof(_CH2) / sizeof(_CH2[0]), 38);
     digitalWrite(SIG_PIN, LOW);
-
-
-//    IrSender.sendRaw(temp, sizeof(ch12) / sizeof(ch12[0]), 38);
-    //    Serial.print("~d10~\n");
   }
 
   else if (LOW == digitalRead(TV_CH13_PIN)) {
@@ -185,22 +178,50 @@ void loop() {
     IrSender.sendRaw(_CH3, sizeof(_CH3) / sizeof(_CH3[0]), 38);
     digitalWrite(SIG_PIN, LOW);
 
-    //IrSender.sendRaw(temp, sizeof(CH13) / sizeof(CH13[0]), 38);
-    //    Serial.print("~d9~\n");
+  }
+
+
+// FIX ME DEMO
+  else if (LOW == digitalRead(FM88_PIN)) {
+    flashSig();
+    digitalWrite(SIG_PIN, HIGH);
+
+    
+    // press tv ch1
+    memcpy_P(temp, TV_ch1, sizeof(TV_ch1));
+    IrSender.sendRaw(temp, sizeof(TV_ch1) / sizeof(TV_ch1[0]), 38);
+    delay(DELAY_BETWEEN_PRESSES);
+
+    // press tv source X4
+    memcpy_P(temp, TV_source, sizeof(TV_source));
+    IrSender.sendRaw(temp, sizeof(TV_source) / sizeof(TV_source[0]), 38);
+    delay(DELAY_BETWEEN_PRESSES);
+    IrSender.sendRaw(temp, sizeof(TV_source) / sizeof(TV_source[0]), 38);
+    delay(DELAY_BETWEEN_PRESSES);
+    IrSender.sendRaw(temp, sizeof(TV_source) / sizeof(TV_source[0]), 38);
+    delay(DELAY_BETWEEN_PRESSES);
+    IrSender.sendRaw(temp, sizeof(TV_source) / sizeof(TV_source[0]), 38);
+    delay(DELAY_BETWEEN_PRESSES);
+
+    // press tv enter 
+    memcpy_P(temp, TV_enter, sizeof(TV_enter));
+    IrSender.sendRaw(temp, sizeof(TV_enter) / sizeof(TV_enter[0]), 38);
+    delay(DELAY_BETWEEN_PRESSES);
+
+    digitalWrite(SIG_PIN, LOW);
+
   }
 
   else if (LOW == digitalRead(TV_CH_PLUS_PIN)) {
     flashSig();
     memcpy_P(temp, chPlus, sizeof(chPlus));
     IrSender.sendRaw(temp, sizeof(chPlus) / sizeof(chPlus[0]), 38);
-    //    Serial.print("~d6~\n");
   }
 
   else if (LOW == digitalRead(TV_VOL_PLUS_PIN)) {
     flashSig();
     memcpy_P(temp, volPlus, sizeof(volPlus));
     IrSender.sendRaw(temp, sizeof(volPlus) / sizeof(volPlus[0]), 38);
-    //      Serial.print("~d5~\n");
   }
 
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~analog pins~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -231,7 +252,6 @@ void loop() {
     memcpy_P(temp, ACon, sizeof(ACon));
 
     IrSender.sendRaw(temp, sizeof(ACon) / sizeof(ACon[0]), 38);
-    //      Serial.print("~a7~\n");
   }
   
     else if ((analogRead(AC_HEAT_ANALOG_PIN)<512)) {
@@ -239,7 +259,6 @@ void loop() {
     memcpy_P(temp, ACheat, sizeof(ACheat));
 
       IrSender.sendRaw(temp, sizeof(ACheat) / sizeof(ACheat[0]), 38);
-//      Serial.print("~a3~\n");
   }
   
     else if ((analogRead(AC_COOL_ANALOG_PIN)<512)) {
@@ -248,7 +267,6 @@ void loop() {
     memcpy_P(temp, ACcool, sizeof(ACcool));
 
       IrSender.sendRaw(temp, sizeof(ACcool) / sizeof(ACcool[0]), 38);
-//    Serial.print("~a2~\n");
   }
   
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
