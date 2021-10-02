@@ -42,14 +42,17 @@ void setup() {
 void loop() {
     Serial.println("Type signal name: "); 
     while (Serial.available() == 0){
-            EVERY_N_MILLISECONDS( 800 ) {digitalWrite(PENDING_LED, !digitalRead(PENDING_LED));}
+            EVERY_N_MILLISECONDS( 1000 ) {digitalWrite(PENDING_LED, !digitalRead(PENDING_LED));}
       }
+    digitalWrite(PENDING_LED, LOW);
     sig_name=Serial.readString();
     Serial.println(sig_name);  
     Serial.println("Now record remote operation: "); 
     irrecv.resume(); // clear buffer to avoid miss-ups
 
-    while (irrecv.available() == 0){ }  
+    while (irrecv.available() == 0){ 
+      EVERY_N_MILLISECONDS( 1000 ) {digitalWrite(SIG_LED, !digitalRead(SIG_LED));}
+    }  
 
     if (irrecv.decode()) {
         Serial.print("Receiving signal:");
