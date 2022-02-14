@@ -1,39 +1,36 @@
 #include "IRremote.h"
 #include "TRIGGER_GOOGLESHEETS.h"       /*Library file for Google Sheets, has to be used after Wi-Fi Client Secure declaration, here everything is in Trigger_WIFI.h, so using it after Trigger_WIFI.h*/ 
 #include "TRIGGER_WIFI.h"
-#include <WiFi.h>
-#include <WiFiClient.h>
+//#include <WiFi.h>
+//#include <WiFiClient.h>
 #include "time.h"
 
-/**********Google Sheets Definations***********/ // source: https://github.com/NishantSahay7/Nodemcu-to-Google-Sheets
-char column_name_in_sheets[ ][6] = {"Device_MAC","Event_id","Event_content"};                        /*1. The Total no of column depends on how many value you have created in Script of Sheets;2. It has to be in order as per the rows decided in google sheets*/
-String Sheets_GAS_ID = "AKfycbwOt5DYOEOGQfJzc8IpKdLViQMV00Q50-DPsRQbsod9krDqKgeq";                                         /*This is the Sheets GAS ID, you need to look for your sheets id*/
-int No_of_Parameters = 3;                                                                /*Here No_of_Parameters decides how many parameters you want to send it to Google Sheets at once, change it according to your needs*/
-/*********************************************/
+
 
 
 /********** GPIO ***********/
-#define IR_SEND_PIN 3
-#define SIG_PIN 2
-#define LED_PIN 2 //NOTE: this is just a regular indication led- has nothing to the with IR nor with the actual operation
+#define IR_SEND_PIN 13
+#define IR_RECEIVE_PIN 14
 
-#define TV_ONOFF_PIN 4 //ENABLED
-#define FIX_ME_PIN 5 //DISABLED
+#define SIG_PIN 15 //NOTE: this is just a regular indication led- has nothing to the with IR nor with the actual operation
 
-#define TV_CH_PLUS_PIN 6 //ENABLED
-#define TV_CH_MINUS_PIN 7 //ENABLED
+#define TV_ONOFF_PIN 17 //ENABLED
+#define FIX_ME_PIN 18 //ENABLED
 
-#define TV_VOL_PLUS_PIN 8 //ENABLED
-#define TV_VOL_MINUS_PIN  9 //ENABLE
+#define TV_CH_PLUS_PIN 19 //ENABLED
+#define TV_CH_MINUS_PIN 20 //ENABLED // FIXME: couldn't find that pin on esp32
 
-#define TV_CH1_PIN 10 //ENABLED
-#define TV_CH12_PIN 11 //ENABLED -MOCKUP-ELADS TV CHANEL 2 
-#define TV_CH13_PIN 12 //ENABLED -MOCKUP-ELADS TV CHANEL 3 
+#define TV_VOL_PLUS_PIN 21 //ENABLED
+#define TV_VOL_MINUS_PIN 22 //ENABLE
 
-#define AC_HEAT_ANALOG_PIN 13 //ENABLED
-#define AC_COOL_ANALOG_PIN 14 //ENABLED
-#define NETFLIX 15 //ENABLED
-#define YOUTUBE 16 //ENABLED
+#define TV_CH1_PIN 23 //ENABLED
+#define TV_CH12_PIN 24 //ENABLED -MOCKUP-ELADS TV CHANEL 2 
+#define TV_CH13_PIN 25 //ENABLED -MOCKUP-ELADS TV CHANEL 3 
+
+#define AC_HEAT_PIN 26 //ENABLED
+#define AC_COOL_PIN 27 //ENABLED
+#define NETFLIX 32 //ENABLED
+#define YOUTUBE 33 //ENABLED
 
 #define DELAY_BETWEEN_PRESSES 500
 /****************************/
@@ -73,29 +70,29 @@ const uint16_t _CH3[67] =    {8930,4470, 530,570, 580,1670, 580,570, 530,1670, 5
 
 /********** RTC ***********/
 // source: https://ziniman.com/2021/07/iot-project-power-detector/
-const char* ntpServer = "pool.ntp.org";
-const long  secGMTOffset = 7200; //Set your timezone offset - Israel is GMT+2 or 7200 sec
-const int   secDaylightOffset = 3600; //Set your daylight offset
-long loopTime, startTime = 0;
-char localTime[32] = "";
-char* minute_of_hour;
-
-time_t localStamp;
-
-void getLocalTime()
-{
-    struct tm timeinfo;
-    if(!getLocalTime(&timeinfo))
-    {
-        Serial.println("Failed to obtain time");
-        return;
-    }
-    strftime(localTime,32,"%d-%m-%Y %H:%M:%S",&timeinfo);
-    strftime(minute_of_hour,2,"M",&timeinfo);
-
-    localStamp = mktime(&timeinfo);
-    
-}
+//const char* ntpServer = "pool.ntp.org";
+//const long  secGMTOffset = 7200; //Set your timezone offset - Israel is GMT+2 or 7200 sec
+//const int   secDaylightOffset = 3600; //Set your daylight offset
+//long loopTime, startTime = 0;
+//char localTime[32] = "";
+//char minute_of_hour[2];
+//
+//time_t localStamp;
+//
+//void getLocalTime()
+//{
+//    struct tm timeinfo;
+//    if(!getLocalTime(&timeinfo))
+//    {
+//        Serial.println("Failed to obtain time");
+//        return;
+//    }
+//    strftime(localTime,32,"%d-%m-%Y %H:%M:%S",&timeinfo);
+//    strftime(minute_of_hour,2,"M",&timeinfo);
+//
+//    localStamp = mktime(&timeinfo);
+//    
+//}
 
 /****************************/
 
@@ -166,8 +163,8 @@ void setup()
     pinMode(TV_VOL_MINUS_PIN, INPUT_PULLUP);
 
 
-    pinMode(AC_HEAT_ANALOG_PIN, INPUT_PULLUP);
-    pinMode(AC_COOL_ANALOG_PIN, INPUT_PULLUP);
+    pinMode(AC_HEAT_PIN, INPUT_PULLUP);
+    pinMode(AC_COOL_PIN, INPUT_PULLUP);
 
     pinMode(SIG_PIN, OUTPUT);
     digitalWrite(SIG_PIN, LOW);
@@ -182,17 +179,20 @@ void setup()
   flashSig_ready();
   Serial.print("SABABOX IS READY\n");
   Data_to_Sheets(No_of_Parameters,  device_MAC, "Connected", ssid);
+//  getLocalTime();
 
 }
 
 
 void loop() {
+    
+//    getLocalTime();
     delay(50);
-
-    if (minutes_of_the_hour()%5 ==0){ 
-      Serial.println("alive_ping " +device_MAC+"/t"+" is alive "+localTime) ;
-      Data_to_Sheets(2,  device_MAC,  "ALIVE");         /*1. This function accepts multiple float parameter, here No_of_Parameters decides how many parameters you want to send to Google Sheets; 2. The values sent should be in order as per the column in Google Sheets*/
-    }  
+    Serial.println("loop");
+//    if ((int)minute_of_hour%5 ==0){ 
+//      Serial.println("alive_ping " +device_MAC+"/t"+" is alive "+localTime) ;
+//      Data_to_Sheets(2,  device_MAC,  "ALIVE");         /*1. This function accepts multiple float parameter, here No_of_Parameters decides how many parameters you want to send to Google Sheets; 2. The values sent should be in order as per the column in Google Sheets*/
+//    }  
 
   if (LOW == digitalRead(TV_ONOFF_PIN)) {
     flashSig();
@@ -307,23 +307,23 @@ void loop() {
 
   }
 
-    else if ((analogRead(AC_HEAT_ANALOG_PIN)<512)) {
+    else if ((analogRead(AC_HEAT_PIN)<512)) {
       flashSig();
       memcpy_P(temp, ACheat, sizeof(ACheat));
   
       IrSender.sendRaw(temp, sizeof(ACheat) / sizeof(ACheat[0]), 38);
-      Serial.print("AC_HEAT_ANALOG_PIN\n");
+      Serial.print("AC_HEAT_PIN\n");
       Data_to_Sheets(No_of_Parameters,  device_MAC, "Button_pressed", "AC_HEAT");
 
   }
 
-    else if ((analogRead(AC_COOL_ANALOG_PIN)<512)) {
+    else if ((analogRead(AC_COOL_PIN)<512)) {
       flashSig();
   
       memcpy_P(temp, ACcool, sizeof(ACcool));
 
       IrSender.sendRaw(temp, sizeof(ACcool) / sizeof(ACcool[0]), 38);
-      Serial.print("AC_COOL_ANALOG_PIN\n");
+      Serial.print("AC_COOL_PIN\n");
       Data_to_Sheets(No_of_Parameters,  device_MAC, "Button_pressed", "AC_COOL");
 
 

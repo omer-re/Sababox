@@ -1,8 +1,12 @@
 #ifndef __TRIGGER_WIFI_H__
 #define __TRIGGER_WIFI_H__
-
 // #include <ESP8266WiFi.h>
+#include <WiFi.h>
+//#endif
+//
+//#ifndef  <WiFiClientSecure.h>
 #include <WiFiClientSecure.h>
+//#endif
 
 
 /********** wifi creds ***********/

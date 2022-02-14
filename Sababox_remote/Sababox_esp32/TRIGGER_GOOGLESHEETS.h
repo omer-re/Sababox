@@ -3,6 +3,14 @@
 
 #include <stdarg.h>
 #include <string.h>
+#include "TRIGGER_WIFI.h"
+
+/**********Google Sheets Definations***********/ // source: https://github.com/NishantSahay7/Nodemcu-to-Google-Sheets
+char column_name_in_sheets[ ][15] = {"Device_MAC","Event_id","Event_content"};                        /*1. The Total no of column depends on how many value you have created in Script of Sheets;2. It has to be in order as per the rows decided in google sheets*/
+String Sheets_GAS_ID = "AKfycbwOt5DYOEOGQfJzc8IpKdLViQMV00Q50-DPsRQbsod9krDqKgeq";                                         /*This is the Sheets GAS ID, you need to look for your sheets id*/
+int No_of_Parameters = 3;                                                                /*Here No_of_Parameters decides how many parameters you want to send it to Google Sheets at once, change it according to your needs*/
+/*********************************************/
+
 
 void sheets_initialization();
 void Send_Data();
@@ -23,7 +31,7 @@ const char* fingerprint = "46 B2 C3 44 9C 59 09 8B 01 B6 F8 BD 4C FB 00 74 91 2F
 String GAS_ID;
 int Count;
 
-void Google_Sheets_Init(char test[ ][6], String sheets_gas_id, int param_size)
+void Google_Sheets_Init(char test[ ][15], String sheets_gas_id, int param_size)
 {
 	GAS_ID = sheets_gas_id;
 	Count = param_size;
